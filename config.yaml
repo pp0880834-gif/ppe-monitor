@@ -1,0 +1,42 @@
+# PPE Violation Monitoring System — Configuration
+
+model:
+  path: "best.pt"          # Will auto-download from HuggingFace if not found
+  conf: 0.35
+  imgsz: 640
+  device: ""               # "" = auto (GPU if available, else CPU)
+
+# Map semantic roles to your model's class NAMES (case-insensitive match).
+# Change ONLY this section when you switch models.
+classes:
+  person:    "person"
+  helmet:    "hat"
+  no_helmet: "nohat"
+  vest:      "vest"
+  no_vest:   "novest"      # Remove this line if your model has no no-vest class
+
+violation:
+  duration:     3.0        # Seconds of continuous violation before alert
+  grace_period: 0.5        # Seconds of grace before resetting timer on missed frame
+  cooldown:    60.0        # Seconds between repeated alerts per (track_id, type)
+
+display:
+  show: true                  # true = Opens the video/camera window on the screen automatically (without having to type --show)
+
+sources:
+  - screen: 1
+ #- screem: 0
+    source: "0"                # 0 for live camera (Webcam), or video file path "video.mp4"
+    show: true                 # You can activate or deactivate it for each camera/source separately
+
+
+telegram:
+  # Recommended: set as environment variables instead of pasting here
+  # $env:TELEGRAM_BOT_TOKEN = "123456:ABC-DEF..."
+  # $env:TELEGRAM_CHAT_ID   = "-100123456789"
+  bot_token: ""
+  chat_id:   ""
+
+output:
+  csv_path:      violations.csv
+  snapshots_dir: snapshots

@@ -1,0 +1,5 @@
+ultralytics>=8.3.0
+huggingface-hub>=0.23.0
+opencv-python>=4.9.0
+requests>=2.31.0
+pyyaml>=6.0
